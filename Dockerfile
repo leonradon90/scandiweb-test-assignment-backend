@@ -15,15 +15,6 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 # Set working directory
 WORKDIR /var/www/html
-# ... [previous Dockerfile content]
-
-# Copy .env file
-COPY .env /var/www/html/.env
-
-# Install PHP dotenv via Composer if not already installed
-RUN composer require vlucas/phpdotenv
-
-# ... [rest of the Dockerfile]
 
 # Copy existing application directory contents
 COPY . /var/www/html
@@ -36,4 +27,3 @@ EXPOSE 10000
 
 # Define the command to run the PHP built-in server
 CMD ["php", "-S", "0.0.0.0:10000", "-t", "public"]
-
