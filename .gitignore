@@ -1,0 +1,19 @@
+# Exclude the vendor directory
+/vendor/
+
+# Exclude environment files
+.env
+
+# Exclude Composer lock file if necessary
+composer.lock
+
+# Exclude OS-specific files
+Thumbs.db
+.DS_Store
+
+# Exclude IDE-specific files
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
