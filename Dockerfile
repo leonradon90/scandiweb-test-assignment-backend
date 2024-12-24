@@ -8,6 +8,11 @@ RUN apt-get update && apt-get install -y \
     zip \
     unzip \
     git \
+    libpng-dev \
+    libjpeg-dev \
+    libfreetype6-dev \
+    zlib1g-dev \
+    && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
 
 # Install Composer
