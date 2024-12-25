@@ -1,6 +1,6 @@
 <?php
 // Set CORS headers
-header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Origin: *"); // Ideally, set to your frontend's URL
 header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type, Authorization");
 
@@ -13,11 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 // Include Composer's autoloader
 require __DIR__ . '/vendor/autoload.php';
 
-// Conditionally load Dotenv in non-production environments
-if (getenv('APP_ENV') !== 'production') {
-    $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
-    $dotenv->load();
-}
+// Remove Dotenv loading in production since Render manages environment variables
 
 // Your application logic starts here
 // For example, setting up GraphQL schema, handling requests, etc.
