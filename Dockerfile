@@ -13,7 +13,8 @@ RUN apt-get update && apt-get install -y \
     libfreetype6-dev \
     zlib1g-dev \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install pdo_mysql mysqli mbstring exif pcntl bcmath gd
+    && docker-php-ext-install pdo_mysql mysqli mbstring exif pcntl bcmath gd \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
@@ -25,7 +26,10 @@ WORKDIR /var/www/html
 COPY . /var/www/html
 
 # Install PHP dependencies
-RUN composer install --no-dev --optimize-autoloader
+RUN composer install --no-dev --optimize-autoloader || { echo 'Composer install failed'; exit 1; }
+
+# Fix permissions (optional, if needed)
+RUN chown -R www-data:www-data /var/www/html
 
 # Expose port 10000 (Render's default port)
 EXPOSE 10000
