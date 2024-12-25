@@ -1,5 +1,4 @@
-# Exclude the vendor directory
-/vendor/
+
 
 # Exclude environment files
 .env
